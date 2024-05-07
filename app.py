@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 # Membaca database
-data = pd.read_csv("C:/Users/ASUS/Documents/tips.csv")
+data = pd.read_csv("tips.csv")
 
 # Menampilkan judul di halaman web
 st.title('Scatter Plot')
