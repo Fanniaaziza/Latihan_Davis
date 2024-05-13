@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import matplotlib.pyplot as plt
+import io
 
 # Fungsi untuk mengambil dokumen HTML dari URL
 def get_doc(url):
@@ -76,16 +77,27 @@ def main():
 
     # Tampilkan histogram dari kolom 'PRICE'
     df['PRICE'] = df['PRICE'].str.replace('£', '').astype(float) # Mengubah harga menjadi tipe data numerik
-    st.subheader('Distribution of Book Prices')
-    st.pyplot(plt.hist(df['PRICE'], bins=20, color='skyblue', edgecolor='black'))
+    fig, ax = plt.subplots()
+    ax.hist(df['PRICE'], bins=20, color='skyblue', edgecolor='black')
+    ax.set_xlabel('Price (£)')
+    ax.set_ylabel('Frequency')
+    ax.set_title('Distribution of Book Prices')
     
+    # Simpan gambar histogram sebagai BytesIO
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+
+    # Tampilkan gambar histogram di Streamlit
+    st.image(buffer)
+
     # Tampilkan histogram dari kolom 'STOCK AVAILABILITY'
     st.subheader('Distribution of Stock Availability')
     df['STOCK AVAILABILITY'].value_counts().plot(kind='bar', color='skyblue', edgecolor='black')
     plt.xlabel('Stock Availability')
     plt.ylabel('Frequency')
     plt.xticks(rotation=45, ha='right')
-    st.pyplot(plt.gcf())
+    st.pyplot()
 
 if __name__ == '__main__':
     main()
