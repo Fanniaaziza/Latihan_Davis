@@ -93,11 +93,12 @@ def main():
 
     # Tampilkan histogram dari kolom 'STOCK AVAILABILITY'
     st.subheader('Distribution of Stock Availability')
-    df['STOCK AVAILABILITY'].value_counts().plot(kind='bar', color='skyblue', edgecolor='black')
-    plt.xlabel('Stock Availability')
-    plt.ylabel('Frequency')
+    fig2, ax2 = plt.subplots()
+    df['STOCK AVAILABILITY'].value_counts().plot(kind='bar', color='skyblue', edgecolor='black', ax=ax2)
+    ax2.set_xlabel('Stock Availability')
+    ax2.set_ylabel('Frequency')
     plt.xticks(rotation=45, ha='right')
-    st.pyplot()
+    st.pyplot(fig2)
 
 if __name__ == '__main__':
     main()
