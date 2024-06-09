@@ -15,6 +15,9 @@ def get_connection():
     )
     return conn
 
+# Mengambil koneksi database
+conn = get_connection()
+
 # Query SQL untuk mengambil total penjualan per tahun
 query_yearly_sales = """
 SELECT CalendarYear AS Year, SUM(factfinance.Amount) AS TotalSales
