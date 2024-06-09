@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-from sqlalchemy import create_engine
 import matplotlib.pyplot as plt
 
 # Function to establish a database connection using pymysql
