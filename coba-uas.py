@@ -1,35 +1,28 @@
 import streamlit as st
+import pymysql
 import pandas as pd
-from sqlalchemy import create_engine
-import mysql.connector as mysqlcon
-import matplotlib.pyplot as plt
 
-# Buat engine SQLAlchemy
-engine = create_engine('mysql+pymysql://root:@localhost:3306/dump-dw_aw')
+# Fungsi untuk membuat koneksi database
+def get_connection():
+    try:
+        conn = pymysql.connect(
+            host="localhost",
+            port=3306,
+            user="root",
+            password="", 
+            database="dump-dw_aw"
+        )
+        return conn
+    except pymysql.MySQLError as e:
+        st.error("Failed to connect to the database.")
+        st.error(f"Error: {e}")
+        return None
 
-# Query SQL untuk mengambil total penjualan pertahun
-query = """
-SELECT CalendarYear AS Year, SUM(factfinance.Amount) AS TotalSales
-FROM dimtime
-JOIN factfinance ON dimtime.TimeKey = factfinance.TimeKey
-GROUP BY CalendarYear
-ORDER BY CalendarYear
-"""
+# Ambil koneksi
+conn = get_connection()
 
-# Baca data ke dalam DataFrame
-df_comparison_year = pd.read_sql(query, engine)
-
-# Menampilkan DataFrame
-st.write("# Perbandingan Total Penjualan Pertahun")
-st.write(df_comparison_year)
-
-# Plot perbandingan total penjualan per tahun
-plt.figure(figsize=(10, 6))
-plt.plot(df_comparison_year['Year'], df_comparison_year['TotalSales'], marker='o')
-plt.title('Perbandingan Total Penjualan Pertahun')
-plt.xlabel('Tahun')
-plt.ylabel('Total Penjualan')
-plt.grid(True)
-
-# Menampilkan plot menggunakan st.pyplot()
-st.pyplot()
+# Periksa koneksi
+if conn is not None:
+    st.success("Connection to the database was successful.")
+else:
+    st.error("Failed to connect to the database.")
