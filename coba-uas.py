@@ -2,9 +2,18 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
+import pymysql
 
-# Buat koneksi ke database
-engine = create_engine('mysql+pymysql://root:@localhost:3306/dump-dw_aw')
+# Function to establish a database connection using pymysql
+@st.cache(allow_output_mutation=True)
+def get_connection():
+    conn = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="", 
+        database="dump-dw_aw"
+    )
+    return conn
 
 # Query SQL untuk mengambil total penjualan per tahun
 query_yearly_sales = """
