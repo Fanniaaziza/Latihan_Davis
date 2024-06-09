@@ -1,4 +1,20 @@
 import pymysql
+
+# Fungsi untuk menguji koneksi
+def test_mysql_connection(host, port, user, password, database):
+    try:
+        conn = pymysql.connect(
+            host=host,
+            port=port,
+            user=user,
+            password=password,
+            database=database
+        )
+        return conn
+    except pymysql.MySQLError as e:
+        print(f"Error connecting to MySQL: {e}")
+        return None
+        
 # Panggil fungsi untuk menguji koneksi ke database AdventureWorks (AW)
 conn = test_mysql_connection(
     host="localhost", 
