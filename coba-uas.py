@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 from sqlalchemy import create_engine
 import pymysql
 
+# Buat koneksi ke database
+engine = create_engine('mysql+pymysql://root:@localhost:3306/dump-dw_aw')
+
 # Function to establish a database connection using pymysql
 @st.cache(allow_output_mutation=True)
 def get_connection():
