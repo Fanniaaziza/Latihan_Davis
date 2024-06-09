@@ -9,7 +9,7 @@ import pymysql
 def get_connection():
     try:
         conn = pymysql.connect(
-            host="localhost",
+            host="localhost:3306",
             user="root",
             password="", 
             database="dump-dw_aw"
