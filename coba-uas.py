@@ -17,7 +17,7 @@ ORDER BY CalendarYear
 """
 
 # Baca data ke dalam DataFrame
-df_comparison_year = pd.read_sql(query, conn)
+df_comparison_year = pd.read_sql(query, engine)
 
 # Menampilkan DataFrame
 st.write("# Perbandingan Total Penjualan Pertahun")
