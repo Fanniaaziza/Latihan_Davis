@@ -3,6 +3,17 @@ import pandas as pd
 from sqlalchemy import create_engine
 import matplotlib.pyplot as plt
 
+# Function to establish a database connection using pymysql
+@st.cache(allow_output_mutation=True)
+def get_connection():
+    conn = pymysql.connect(
+        host="localhost",
+        user="root",
+        password="", 
+        database="db_Adventureworks"
+    )
+    return conn
+
 # Buat engine SQLAlchemy
 engine = create_engine('mysql+pymysql://root:@localhost:3306/dump-dw_aw')
 
