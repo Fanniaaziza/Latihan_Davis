@@ -33,7 +33,7 @@ if conn is not None:
     """
 
     # Baca data ke dalam DataFrame
-    df_yearly_sales = pd.read_sql(query_yearly_sales, engine)
+    df_yearly_sales = pd.read_sql(query_yearly_sales, conn)
     
     # Plot perbandingan total penjualan per tahun
     st.write("# Perbandingan Total Penjualan Pertahun")
@@ -53,7 +53,7 @@ if conn is not None:
     '''
     
     # Baca ke DataFrame
-    df_sales_by_region = pd.read_sql(query_sales_by_region, engine)
+    df_sales_by_region = pd.read_sql(query_sales_by_region, conn)
     
     # Buat visualisasi Proporsi Penjualan per Wilayah atau Region (Pie Chart)
     st.write("# Proporsi Penjualan per Wilayah atau Region")
@@ -80,7 +80,7 @@ if conn is not None:
     '''
     
     # Baca ke DataFrame
-    df_sales_by_category = pd.read_sql(query_sales_by_category, engine)
+    df_sales_by_category = pd.read_sql(query_sales_by_category, conn)
     
     # Buat visualisasi Komposisi Penjualan per Kategori Produk (Bar Chart)
     st.write("# Komposisi Penjualan per Kategori Produk")
@@ -113,7 +113,7 @@ if conn is not None:
     '''
     
     # Baca ke DataFrame
-    df_sales_by_region_product = pd.read_sql(query_sales_by_region_product, engine)
+    df_sales_by_region_product = pd.read_sql(query_sales_by_region_product, conn)
     
     # Buat visualisasi Bubble Plot Hubungan Wilayah dan Penjualan (Bubble Plot)
     st.write("# Bubble Plot Hubungan Wilayah dan Penjualan")
