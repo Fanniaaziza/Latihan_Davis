@@ -8,9 +8,10 @@ import matplotlib.pyplot as plt
 def get_connection():
     conn = pymysql.connect(
         host="localhost",
+        port="3306",
         user="root",
         password="", 
-        database="db_Adventureworks"
+        database="dump-dw_aw"
     )
     return conn
 
