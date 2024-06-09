@@ -7,14 +7,22 @@ import pymysql
 # Function to establish a database connection using pymysql
 @st.cache(allow_output_mutation=True)
 def get_connection():
-    conn = pymysql.connect(
-        host="localhost",
-        user="root",
-        password="", 
-        database="dump-dw_aw"
-    )
-    return conn
+    try:
+        conn = pymysql.connect(
+            host="localhost",
+            user="root",
+            password="", 
+            database="dump-dw_aw"
+        )
+        return conn
+    except pymysql.MySQLError as e:
+        st.error(f"Error connecting to database: {e}")
+        return None
 
+# Mengambil koneksi database
+conn = get_connection()
+
+if conn is not None:
 # Query SQL untuk mengambil total penjualan per tahun
 query_yearly_sales = """
 SELECT CalendarYear AS Year, SUM(factfinance.Amount) AS TotalSales
@@ -118,3 +126,8 @@ ax.set(title='Bubble Plot Hubungan Wilayah dan Penjualan',
        xlabel='Wilayah')
 ax.legend()
 st.pyplot(fig)
+
+ # Tutup koneksi setelah selesai
+    conn.close()
+else:
+    st.error("Failed to connect to the database. Please check your connection settings.")
