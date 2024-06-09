@@ -9,5 +9,5 @@ numpy
 datetime
 openpyxl
 pymysql
-SQLAlchemy
+sqlalchemy
 scipy
