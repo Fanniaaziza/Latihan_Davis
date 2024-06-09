@@ -12,16 +12,16 @@ def test_mysql_connection(host, port, user, password, database):
         )
         return conn
     except pymysql.MySQLError as e:
-        print(f"Error connecting to MySQL: {e}")
+        print(f"Error connecting to MySQL database: {e}")
         return None
-        
-# Panggil fungsi untuk menguji koneksi ke database AdventureWorks (AW)
+
+# Panggil fungsi test_mysql_connection untuk menguji koneksi
 conn = test_mysql_connection(
-    host="localhost", 
-    port=3306,         
-    user="root",      
-    password="",       
-    database="dump-dw_aw"  
+    host="localhost",
+    port=3306,
+    user="root",
+    password="",
+    database="dump-dw_aw"
 )
 
 # Periksa apakah koneksi berhasil
