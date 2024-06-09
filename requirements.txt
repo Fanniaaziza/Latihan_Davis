@@ -10,4 +10,5 @@ datetime
 openpyxl
 pymysql
 sqlalchemy
+mysql.connector
 scipy
