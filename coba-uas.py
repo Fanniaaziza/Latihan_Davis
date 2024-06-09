@@ -15,9 +15,6 @@ def get_connection():
     )
     return conn
 
-# Buat engine SQLAlchemy
-engine = create_engine('mysql+pymysql://root:@localhost:3306/dump-dw_aw')
-
 # Query SQL untuk mengambil total penjualan pertahun
 query = """
 SELECT CalendarYear AS Year, SUM(factfinance.Amount) AS TotalSales
@@ -28,7 +25,7 @@ ORDER BY CalendarYear
 """
 
 # Baca data ke dalam DataFrame
-df_comparison_year = pd.read_sql(query, engine)
+df_comparison_year = pd.read_sql(query, conn)
 
 # Menampilkan DataFrame
 st.write("# Perbandingan Total Penjualan Pertahun")
